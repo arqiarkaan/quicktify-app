@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart2, AlertCircle, TrendingUp, Code } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
 import { motion, Variants } from 'framer-motion';
 import {
   containerVariants,
@@ -198,7 +197,7 @@ export function FeaturesSection() {
                                 style={{ originY: 1 }}
                               />
                               <div className="absolute top-2 left-0 right-0 text-center text-xs font-medium">
-                                Positif
+                                Positive
                               </div>
                             </motion.div>
                             <motion.div
@@ -211,7 +210,7 @@ export function FeaturesSection() {
                                 style={{ originY: 1 }}
                               />
                               <div className="absolute top-2 left-0 right-0 text-center text-xs font-medium">
-                                Netral
+                                Neutral
                               </div>
                             </motion.div>
                             <motion.div
@@ -224,7 +223,7 @@ export function FeaturesSection() {
                                 style={{ originY: 1 }}
                               />
                               <div className="absolute top-2 left-0 right-0 text-center text-xs font-medium">
-                                Negatif
+                                Negative
                               </div>
                             </motion.div>
                           </motion.div>
@@ -248,32 +247,55 @@ export function FeaturesSection() {
                             {[
                               {
                                 emotion: 'Neutral',
-                                color: 'blue',
-                                height: '4/6',
+                                bgColor: 'rgba(59, 130, 246, 0.2)',
+                                barColor: 'rgba(59, 130, 246, 0.4)',
+                                height: '66.67%',
                               },
                               {
                                 emotion: 'Happy',
-                                color: 'green',
-                                height: '5/6',
+                                bgColor: 'rgba(34, 197, 94, 0.2)',
+                                barColor: 'rgba(34, 197, 94, 0.4)',
+                                height: '83.33%',
                               },
-                              { emotion: 'Anger', color: 'red', height: '2/6' },
+                              {
+                                emotion: 'Anger',
+                                bgColor: 'rgba(239, 68, 68, 0.2)',
+                                barColor: 'rgba(239, 68, 68, 0.4)',
+                                height: '33.33%',
+                              },
                               {
                                 emotion: 'Fear',
-                                color: 'purple',
-                                height: '1/6',
+                                bgColor: 'rgba(147, 51, 234, 0.2)',
+                                barColor: 'rgba(147, 51, 234, 0.4)',
+                                height: '16.67%',
                               },
-                              { emotion: 'Sad', color: 'gray', height: '3/6' },
-                              { emotion: 'Love', color: 'pink', height: '4/6' },
+                              {
+                                emotion: 'Sad',
+                                bgColor: 'rgba(107, 114, 128, 0.2)',
+                                barColor: 'rgba(107, 114, 128, 0.4)',
+                                height: '50%',
+                              },
+                              {
+                                emotion: 'Love',
+                                bgColor: 'rgba(236, 72, 153, 0.2)',
+                                barColor: 'rgba(236, 72, 153, 0.4)',
+                                height: '66.67%',
+                              },
                             ].map((item, index) => (
                               <motion.div
                                 key={item.emotion}
-                                className={`h-12 bg-${item.color}-400/20 rounded-lg relative overflow-hidden`}
+                                className="h-12 rounded-lg relative overflow-hidden"
+                                style={{ backgroundColor: item.bgColor }}
                                 variants={chartBarVariants}
                               >
                                 <motion.div
-                                  className={`absolute bottom-0 w-full h-${item.height} bg-${item.color}-400/40 rounded-b-lg`}
+                                  className="absolute bottom-0 w-full rounded-b-lg"
+                                  style={{
+                                    backgroundColor: item.barColor,
+                                    height: item.height,
+                                    originY: 1,
+                                  }}
                                   variants={chartBarVariants}
-                                  style={{ originY: 1 }}
                                 />
                                 <div className="absolute top-1 left-0 right-0 text-center text-xs">
                                   {item.emotion}
@@ -296,19 +318,30 @@ export function FeaturesSection() {
                           }}
                         >
                           {[
-                            'baik',
-                            'keren',
-                            'mantap',
-                            'bagus',
-                            'suka',
-                            'berfungsi',
-                          ].map((word, index) => (
+                            { word: 'bagus', opacity: 30 },
+                            { word: 'keren', opacity: 40 },
+                            { word: 'mantap', opacity: 50 },
+                            { word: 'baik', opacity: 35 },
+                            { word: 'sempurna', opacity: 45 },
+                            { word: 'luar biasa', opacity: 25 },
+                            { word: 'suka', opacity: 55 },
+                            { word: 'berfungsi', opacity: 40 },
+                          ].map((item, index) => (
                             <motion.span
-                              key={word}
-                              className={`text-xs py-1 px-2 bg-quicktify-primary/${20 + index * 10} rounded-full`}
+                              key={item.word}
+                              className="text-xs py-1 px-2 rounded-full"
+                              style={{
+                                backgroundColor: `hsl(var(--primary) / ${
+                                  item.opacity / 100
+                                })`,
+                                color:
+                                  item.opacity > 40
+                                    ? 'white'
+                                    : 'hsl(var(--primary))',
+                              }}
                               variants={tagVariants}
                             >
-                              {word}
+                              {item.word}
                             </motion.span>
                           ))}
                         </motion.div>
